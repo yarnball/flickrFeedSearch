@@ -8,15 +8,13 @@ export const flickrFeed = (
     case 'LOADING_STARTED':
       return { ...state, loading:1}
     case "LOAD_SUCCESS":
-      console.log('data success!', action)
       return { ...state, 
               images: action.data.photos.photo, 
               totalRes: action.data.photos.total,
               loaded: 2 
           };
     case "LOAD_FAIL":
-      console.log('data BAD!!', action)
-      return state;
+      return { ...state, loading:4}
     default:
       return state;
   }
