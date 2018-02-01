@@ -6,7 +6,6 @@ import { Jumbotron, Button, Grid, Well, Row } from "react-bootstrap"
 
 const Home = props => {
   const ready = props.searchQuery.length < 1
-  console.log("ready", ready)
   return (
     <Grid>
       <Jumbotron>

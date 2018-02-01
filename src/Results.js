@@ -3,17 +3,10 @@ import { connect } from "react-redux"
 import sizeMe from "react-sizeme"
 import StackGrid, { transitions } from "react-stack-grid"
 import { Badge, Button, Label } from "react-bootstrap"
+import { formatImg } from './helpers'
 const { scaleDown } = transitions
 
 const Results = props => {
-  const images = props.images
-    .map(img => ({
-      src: `https://farm${img.farm}.staticflickr.com/${img.server}/${img.id}_${
-        img.secret
-      }.jpg`,
-      id: img.id
-    }))
-    .slice(0, 30)
   const { size: { width } } = props
   const active = props.totalRes.length > 0
   return (
@@ -33,7 +26,7 @@ const Results = props => {
         entered={scaleDown.entered}
         leaved={scaleDown.leaved}
       >
-        {images.map(img => (
+        {formatImg(props.images).map(img => (
           <a key={img.id} href={img.src} target="_blank">
             <img src={img.src} alt={img.id} width={width / 4} />
           </a>
