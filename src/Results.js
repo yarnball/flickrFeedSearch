@@ -18,7 +18,7 @@ const Results = props => {
         </p>
       )}
       <StackGrid
-        columnWidth={width <= 768 ? "100%" : "33.33%"}
+        columnWidth={width <= 168 ? "100%" : "33.33%"}
         monitorImagesLoaded={true}
         appear={scaleDown.appear}
         appeared={scaleDown.appeared}
