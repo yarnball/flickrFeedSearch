@@ -2,19 +2,19 @@ import React from "react"
 import { connect } from "react-redux"
 import sizeMe from "react-sizeme"
 import StackGrid, { transitions } from "react-stack-grid"
-import { Badge, Button, Label } from "react-bootstrap"
-import { formatImg } from './helpers'
+import { Button, Label } from "react-bootstrap"
+import { clearSearch } from "./actions/feedAction"
 const { scaleDown } = transitions
 
 const Results = props => {
   const { size: { width } } = props
-  const active = props.totalRes.length > 0
+   const active = props.images.length > 0
   return (
     <div>
-      {active && (
+    {active && (
         <p>
-          <Badge>{props.totalRes}</Badge> results for{" "}
-          <Label bsStyle="primary">{props.searchQuery}</Label>
+          Results for <Label bsStyle="primary">{props.searchQuery}</Label>
+          <Label bsStyle="info" onClick={props.clearSearch} style={{float:'right', cursor:'pointer'}}>Clear Search</Label>
         </p>
       )}
       <StackGrid
@@ -26,21 +26,19 @@ const Results = props => {
         entered={scaleDown.entered}
         leaved={scaleDown.leaved}
       >
-        {formatImg(props.images).map(img => (
-          <a key={img.id} href={img.src} target="_blank">
-            <img src={img.src} alt={img.id} width={width / 4} />
+        {props.images.map(img => (
+          <a key={img.link} href={img.src} target="_blank">
+            <img src={img.media.m} alt={img.link} width={width / 4} />
           </a>
         ))}
       </StackGrid>
-      <br />
+      <br/>
       {active && (
         <center>
-          {" "}
           <a href={`https://www.flickr.com/search/?text=${props.searchQuery}`} target='_blank'> 
           <Button bsStyle="info">See more results...</Button></a>
         </center>
       )}
-      <br />
     </div>
   )
 }
@@ -48,14 +46,13 @@ const Results = props => {
 const mapStateToProps = state => {
   return {
     images: state.flickrFeed.images,
-    totalRes: state.flickrFeed.totalRes,
-    searchQuery: state.flickrFeed.searchQuery
+    searchQuery: state.flickrFeed.searchQuery,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    // searchFlickr: payload => dispatch(searchFlickr(payload))
+    clearSearch: () => dispatch(clearSearch)
   }
 }
 

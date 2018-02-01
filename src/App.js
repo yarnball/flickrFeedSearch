@@ -17,6 +17,7 @@ const Home = props => {
               style={{ width: "100%", padding: "1rem" }}
               placeholder="Search for images"
               onChange={e => props.searchONLY(e.target.value)}
+              value={props.searchQuery}
             />
           </Well>
         </Row>
