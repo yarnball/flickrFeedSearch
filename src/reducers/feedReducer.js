@@ -1,8 +1,10 @@
 export const flickrFeed = (
-  state = { images: [], totalRes:'', searchQuery: [], },
+  state = { images: [], totalRes:'', searchQuery: '', },
   action
 ) => {
   switch (action.type) {
+    case 'SEARCH_QUERY':
+      return { ...state, searchQuery:action.payload}  
     case 'LOADING_STARTED':
       return { ...state, loading:1}
     case "LOAD_SUCCESS":

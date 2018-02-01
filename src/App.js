@@ -1,11 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { searchFlickr } from './actions/feedAction'
+import { searchFlickr, searchONLY } from './actions/feedAction'
 import Results from './Results'
 
 const Home = props => {
   return <div>
-  <input onChange={props.searchFlickr} />
+  <input onChange={e=> props.searchONLY(e.target.value)} />
+  <button onClick={() => props.searchFlickr(props.searchQuery)}> search </button>
   <Results />
   </div>
 }
@@ -18,7 +19,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    searchFlickr: payload => dispatch(searchFlickr(payload))
+    searchFlickr: payload => dispatch(searchFlickr(payload)),
+    searchONLY: payload => dispatch(searchONLY(payload))
   }
 }
 
